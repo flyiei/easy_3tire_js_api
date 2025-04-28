@@ -14,6 +14,18 @@ const pool = new Pool({
 app.use(cors());
 app.use(express.json());
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Welcome to the API service', 
+    endpoints: [
+      { path: '/health', method: 'GET', description: 'Health check endpoint' },
+      { path: '/api/items', method: 'GET', description: 'Get all items' },
+      { path: '/api/items', method: 'POST', description: 'Add a new item' }
+    ]
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', service: 'api' });
